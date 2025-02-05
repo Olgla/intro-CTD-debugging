@@ -26,6 +26,14 @@ function getRandomNumber(min, max) {
 function checkGuess() {
   // Get value from guess input element
   const guess = parseInt(guessInput.value, 10);
+  
+  //pattern attribute didn't work in my browser, adding this validation:
+  
+  if (guess < 1 || guess > 99 || isNaN(guess)) {
+    alert('Please enter a number between 1 and 99');
+    return;  
+  }
+
   attempts = attempts + 1;
 
   hideAllMessages();
@@ -51,7 +59,14 @@ function checkGuess() {
     const remainingAttempts = maxNumberOfAttempts - attempts;
 
     numberOfGuessesMessage.style.display = '';
-    numberOfGuessesMessage.innerHTML = `You guessed ${guess}. <br> ${remainingAttempts} guesses remaining`;
+
+    //Adding guess number check:
+    if (remainingAttempts === 1) {
+      numberOfGuessesMessage.innerHTML = `You guessed ${guess}. <br> 1 guess remaining`;
+    } else {
+      numberOfGuessesMessage.innerHTML = `You guessed ${guess}. <br> ${remainingAttempts} guesses remaining`;
+    }   
+
   }
 
   // if (attempts ==== maxNumberOfAttempts) {
